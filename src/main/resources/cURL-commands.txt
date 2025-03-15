@@ -1,0 +1,55 @@
+==================Valid Request and Response==================
+
+curl --location 'http://localhost:8080/products' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "Sample Product",
+    "price": 19.99,
+    "description": "This is a sample product with all required details.",
+    "category": {
+        "id": 1,
+        "name": "Electronics",
+        "parentCategory": {
+            "id": 0,
+            "name": "Root"
+        },
+        "subCategories": [
+            {
+                "id": 2,
+                "name": "Mobile Phones"
+            }
+        ]
+    },
+    "tags": [
+        "new",
+        "featured"
+    ],
+    "attributes": {
+        "color": "blue",
+        "warranty": "2 years"
+    }
+}'
+
+=========================Invalid Request============================
+curl --location 'http://localhost:8080/products' \
+--header 'Content-Type: application/json' \
+--data '{
+  "name": "Pr",
+  "price": 0,
+  "description": "This product has multiple validation issues.",
+  "category": {
+    "id": "one",
+    "name": ""
+  },
+  "tags": [123, true],
+  "attributes": {
+    "color": 1234
+  }
+}
+'
+
+=========================Invalid Response============================
+curl --location 'http://localhost:8080/products/a40f24ff-a102-482d-932d-66c9525cb343' \
+--header 'Content-Type: application/json'
+
+
